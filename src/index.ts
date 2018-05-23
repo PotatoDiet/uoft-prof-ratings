@@ -44,7 +44,10 @@ function createInfoField(profInfo: ProfessorInfo): HTMLElement {
 
   let td4 = document.createElement('td');
   td4.className = 'colEnrol';
-  td4.innerText = profInfo.hotness;
+  let img = document.createElement('img');
+  img.setAttribute('src', profInfo.hotness);
+  img.setAttribute('height', '15px');
+  td4.appendChild(img);
 
   tr.appendChild(td1);
   tr.appendChild(td2);

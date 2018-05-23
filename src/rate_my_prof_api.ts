@@ -63,7 +63,7 @@ class RateMyProfApi {
       overallQuality: doc.querySelector('.quality .grade')!.innerHTML.trim(),
       wouldTakeAgain: doc.querySelector('.takeAgain .grade')!.innerHTML.trim(),
       levelOfDifficulty: doc.querySelector('.difficulty .grade')!.innerHTML.trim(),
-      hotness: 'placeholder'
+      hotness: this.baseUrl + doc.querySelector('.grade img')!.getAttribute('src')!
     };
 
     browser.storage.local.set({[name]: JSON.stringify(profInfo)});
