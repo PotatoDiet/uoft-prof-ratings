@@ -1,0 +1,19 @@
+{
+  "name": "uoft-prof-ratings",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start:firefox": "webpack -w --mode development & web-ext run --source-dir ./"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^2.8.3",
+    "web-ext": "^2.6.0",
+    "web-ext-types": "^2.1.0",
+    "ts-loader": "^4.3.0",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3"
+  }
+}

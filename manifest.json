@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "UofT Prof Ratings",
+  "version": "1.0",
+
+  "description": "Adds ratemyprofessors.com info to UofT's timetable",
+
+  "content_scripts": [
+    {
+      "matches": ["https://timetable.iit.artsci.utoronto.ca/"],
+      "js": ["dist/bundle.js"]
+    }
+  ],
+
+  "permissions": [
+    "https://www.ratemyprofessors.com/search.jsp?*",
+    "https://www.ratemyprofessors.com/ShowRatings.jsp?*",
+    "storage"
+  ]
+}
