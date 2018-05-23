@@ -1,23 +1,24 @@
 import { RateMyProfApi, ProfessorInfo } from './rate_my_prof_api';
 
 async function main() {
-  const searchButton = document.getElementById('searchButton')!;
-  searchButton.addEventListener('click', () => {
-    let client = new RateMyProfApi();
-    setTimeout(() => {
-      let courses = getCourses();
-      courses.forEach(async el => {
-        const name = getProfName(el);
-        if (name !== '—') {
-          const profInfo = await client.getProfInfo(name);
-          if (profInfo != null) {
-            el.appendChild(createHeaderField());
-            el.appendChild(createInfoField(profInfo));
-          }
+  let client = new RateMyProfApi();
+
+  let observer = new MutationObserver(() => {
+    let courses = getCourses();
+    courses.forEach(async el => {
+      const name = getProfName(el);
+      if (name !== '—') {
+        const profInfo = await client.getProfInfo(name);
+        if (profInfo != null) {
+          el.appendChild(createHeaderField());
+          el.appendChild(createInfoField(profInfo));
         }
-      });
-    }, 1000);
+      }
+    });
   });
+
+  const coursesEl = document.querySelector('#courses')!;
+  observer.observe(coursesEl, { childList: true });
 }
 
 function getCourses(): NodeListOf<HTMLElement> {
