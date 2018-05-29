@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "start:firefox": "webpack -w --mode development & web-ext run --source-dir dist",
-    "build": "webpack --mode production && web-ext build"
+    "build": "webpack --mode production && web-ext build --source-dir dist --overwrite-dest"
   },
   "author": "",
   "license": "MIT",
