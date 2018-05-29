@@ -6,8 +6,10 @@ async function main() {
   switch (window.location.href) {
     case 'https://student.utm.utoronto.ca/timetable/':
       new TimetableUtm();
+      break;
     case 'https://timetable.iit.artsci.utoronto.ca/':
       new TimetableStg();
+      break;
   }
 }
 
