@@ -1,3 +1,7 @@
+// needed because chrome uses chrome.storage namespace with callbacks instead of the standardized
+// browser.storage with promises.
+import { browser } from 'webextension-polyfill-ts'
+
 interface ProfessorInfo {
   readonly overallQuality: string;
   readonly wouldTakeAgain: string;

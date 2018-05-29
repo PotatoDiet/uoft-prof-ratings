@@ -4,16 +4,20 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "start:firefox": "webpack -w --mode development & web-ext run --source-dir ./"
+    "start:firefox": "webpack -w --mode development & web-ext run --source-dir dist",
+    "build": "webpack --mode production && web-ext build"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "ts-loader": "^4.3.0",
     "typescript": "^2.8.3",
     "web-ext": "^2.6.0",
     "web-ext-types": "^2.1.0",
-    "ts-loader": "^4.3.0",
     "webpack": "^4.8.3",
     "webpack-cli": "^2.1.3"
+  },
+  "dependencies": {
+    "webextension-polyfill-ts": "^0.8.4"
   }
 }
