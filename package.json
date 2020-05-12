@@ -8,7 +8,7 @@
     "build": "webpack --mode production && web-ext build --source-dir dist --overwrite-dest"
   },
   "author": "",
-  "license": "MIT",
+  "license": "GPL-3.0-only",
   "devDependencies": {
     "ts-loader": "^4.3.0",
     "typescript": "^2.8.3",
