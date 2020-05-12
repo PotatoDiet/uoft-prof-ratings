@@ -7,8 +7,10 @@
 
   "content_scripts": [
     {
-      "matches": ["https://timetable.iit.artsci.utoronto.ca/",
-                  "https://student.utm.utoronto.ca/timetable/"],
+      "matches": [
+        "https://timetable.iit.artsci.utoronto.ca/",
+        "https://student.utm.utoronto.ca/timetable/"
+      ],
       "js": ["bundle.js"]
     }
   ],

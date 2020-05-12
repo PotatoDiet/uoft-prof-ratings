@@ -6,7 +6,15 @@ interface ProfessorInfo {
   readonly overallQuality: string;
   readonly wouldTakeAgain: string;
   readonly levelOfDifficulty: string;
-  readonly hotness: string;
+}
+
+function isProfessorInfo(obj: any): obj is ProfessorInfo {
+  return (
+    obj !== undefined &&
+    typeof obj.overallQuality === "string" &&
+    typeof obj.wouldTakeAgain === "string" &&
+    typeof obj.levelOfDifficulty === "string"
+  );
 }
 
 class RateMyProfApi {
@@ -55,20 +63,22 @@ class RateMyProfApi {
       return null;
     }
 
-
     let searchParams = new URLSearchParams();
     searchParams.set('tid', profId);
     const response = await fetch(this.baseUrl + 'ShowRatings.jsp?' + searchParams.toString());
 
     const parser = new DOMParser();
     const doc = parser.parseFromString(await response.text(), 'text/html');
+    console.log(profId);
 
-    const profInfo: ProfessorInfo = {
-      overallQuality: doc.querySelector('.quality .grade')!.innerHTML.trim(),
-      wouldTakeAgain: doc.querySelector('.takeAgain .grade')!.innerHTML.trim(),
-      levelOfDifficulty: doc.querySelector('.difficulty .grade')!.innerHTML.trim(),
-      hotness: this.baseUrl + doc.querySelector('.grade img')!.getAttribute('src')!
+    const profInfo = {
+      overallQuality: doc.querySelector("[class^=RatingValue__Numerator-]")?.innerHTML.trim(),
+      wouldTakeAgain: doc.querySelector("[class^=FeedbackItem__FeedbackNumber-]")?.innerHTML.trim(),
+      levelOfDifficulty: doc.querySelector("[class^=FeedbackItem__FeedbackNumber]")?.innerHTML.trim()
     };
+    if (!isProfessorInfo(profInfo)) {
+      return null;
+    }
 
     browser.storage.local.set({[name]: JSON.stringify(profInfo)});
 

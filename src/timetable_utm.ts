@@ -8,6 +8,7 @@ class TimetableUtm {
       this.getCourses().forEach(async el => {
         const name = this.getProfName(el);
         if (name !== '—' && name !== '') {
+          console.log(name);
           const profInfo = await client.getProfInfo(name);
           if (profInfo != null) {
             el.parentNode!.insertBefore(this.createInfoField(profInfo), el.nextSibling);
@@ -38,16 +39,9 @@ class TimetableUtm {
     let td3 = document.createElement('td');
     td3.innerText = profInfo.levelOfDifficulty;
 
-    let td4 = document.createElement('td');
-    let img = document.createElement('img');
-    img.setAttribute('src', profInfo.hotness);
-    img.setAttribute('height', '15px');
-    td4.appendChild(img);
-
     tr.appendChild(td1);
     tr.appendChild(td2);
     tr.appendChild(td3);
-    tr.appendChild(td4);
 
     return tr;
   }
@@ -68,14 +62,9 @@ class TimetableUtm {
     td3.className = 'sectionData';
     td3.innerText = 'Level of Difficulty';
 
-    let td4 = document.createElement('td');
-    td4.className = 'sectionData';
-    td4.innerText = 'Hotness';
-
     tr.appendChild(td1);
     tr.appendChild(td2);
     tr.appendChild(td3);
-    tr.appendChild(td4);
 
     return tr;
   }

@@ -42,17 +42,9 @@ class TimetableStg {
     td3.className = 'colEnrol';
     td3.innerText = profInfo.levelOfDifficulty;
 
-    let td4 = document.createElement('td');
-    td4.className = 'colEnrol';
-    let img = document.createElement('img');
-    img.setAttribute('src', profInfo.hotness);
-    img.setAttribute('height', '15px');
-    td4.appendChild(img);
-
     tr.appendChild(td1);
     tr.appendChild(td2);
     tr.appendChild(td3);
-    tr.appendChild(td4);
 
     return tr;
   }
@@ -73,14 +65,9 @@ class TimetableStg {
     td3.className = 'sectionData';
     td3.innerText = 'Level of Difficulty';
 
-    let td4 = document.createElement('td');
-    td4.className = 'sectionData';
-    td4.innerText = 'Hotness';
-
     tr.appendChild(td1);
     tr.appendChild(td2);
     tr.appendChild(td3);
-    tr.appendChild(td4);
 
     return tr;
   }
