@@ -78,4 +78,4 @@ class TimetableStg {
   }
 }
 
-export { TimetableStg };
+new TimetableStg();

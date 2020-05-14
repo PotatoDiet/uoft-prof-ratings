@@ -8,7 +8,6 @@ class TimetableUtm {
       this.getCourses().forEach(async el => {
         const name = this.getProfName(el);
         if (name !== '—' && name !== '') {
-          console.log(name);
           const profInfo = await client.getProfInfo(name);
           if (profInfo != null) {
             el.parentNode!.insertBefore(this.createInfoField(profInfo), el.nextSibling);
@@ -75,4 +74,4 @@ class TimetableUtm {
   }
 }
 
-export { TimetableUtm };
+new TimetableUtm();

@@ -2,16 +2,17 @@
   "name": "uoft-prof-ratings",
   "version": "1.1.0",
   "description": "",
-  "main": "dist/index.js",
   "scripts": {
-    "start:firefox": "webpack -w --mode development & web-ext run --source-dir dist",
-    "build": "webpack --mode production && web-ext build --source-dir dist --overwrite-dest",
-    "watch": "tsc --watch"
+    "start:firefox": "web-ext run --verbose -t firefox-desktop",
+    "start:chromium": "web-ext run --verbose -t chromium",
+    "watch": "tsc-watch --onSuccess 'npm run bundle'",
+    "bundle": "webpack --mode production --config webpack.config.js",
+    "build": "web-ext build"
   },
   "author": "",
   "license": "GPL-3.0-only",
   "devDependencies": {
-    "ts-loader": "^7.0.4",
+    "tsc-watch": "^4.2.5",
     "typescript": "^3.9.2",
     "web-ext": "^4.2.0",
     "web-ext-types": "^3.2.1",

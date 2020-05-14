@@ -1,8 +1,8 @@
 // needed because chrome uses chrome.storage namespace with callbacks instead of the standardized
 // browser.storage with promises.
-import { browser } from 'webextension-polyfill-ts'
+import { browser } from "webextension-polyfill-ts";
 
-interface ProfessorInfo {
+export interface ProfessorInfo {
   readonly overallQuality: string;
   readonly wouldTakeAgain: string;
   readonly levelOfDifficulty: string;
@@ -17,7 +17,7 @@ function isProfessorInfo(obj: any): obj is ProfessorInfo {
   );
 }
 
-class RateMyProfApi {
+export class RateMyProfApi {
   private readonly schoolId = '12184';
   private readonly baseUrl = 'https://www.ratemyprofessors.com/';
 
@@ -38,12 +38,12 @@ class RateMyProfApi {
 
     const profs = doc.querySelectorAll('.listing.PROFESSOR a');
     if (profs.length === 0) {
-      return Promise.resolve(null);
+      return null;
     }
 
     // 2nd param can be any url, just need something to supress errors.
     const idUrl = new URL(profs[0].getAttribute('href')!, 'http://test.com/');
-    return Promise.resolve(idUrl.searchParams.get('tid'));
+    return idUrl.searchParams.get('tid');
   }
 
   public async getProfInfo(name: string): Promise<ProfessorInfo | null> {
@@ -51,11 +51,11 @@ class RateMyProfApi {
       const res = await browser.storage.local.get(name);
       const profInfo = res[name];
       if (profInfo != null) {
-        return Promise.resolve(JSON.parse(profInfo as string));
+        return JSON.parse(profInfo as string);
       }
     } catch (e) {
       console.error(e);
-      return Promise.resolve(null);
+      return null;
     }
 
     const profId = await this.getProfId(name);
@@ -69,7 +69,6 @@ class RateMyProfApi {
 
     const parser = new DOMParser();
     const doc = parser.parseFromString(await response.text(), 'text/html');
-    console.log(profId);
 
     const profInfo = {
       overallQuality: doc.querySelector("[class^=RatingValue__Numerator-]")?.innerHTML.trim(),
@@ -82,8 +81,6 @@ class RateMyProfApi {
 
     browser.storage.local.set({[name]: JSON.stringify(profInfo)});
 
-    return Promise.resolve(profInfo);
+    return profInfo;
   }
 }
-
-export { RateMyProfApi, ProfessorInfo };
