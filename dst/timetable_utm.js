@@ -1,14 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const rate_my_prof_api_1 = require("./rate_my_prof_api");
+const webextension_polyfill_ts_1 = require("webextension-polyfill-ts");
 class TimetableUtm {
     constructor() {
-        let client = new rate_my_prof_api_1.RateMyProfApi();
         let observer = new MutationObserver(() => {
             this.getCourses().forEach(async (el) => {
                 const name = this.getProfName(el);
                 if (name !== '—' && name !== '') {
-                    const profInfo = await client.getProfInfo(name);
+                    const profInfo = await webextension_polyfill_ts_1.browser.runtime.sendMessage({
+                        "getProfInfo": name
+                    });
                     if (profInfo != null) {
                         el.parentNode.insertBefore(this.createInfoField(profInfo), el.nextSibling);
                         el.parentNode.insertBefore(this.createHeaderField(), el.nextSibling);

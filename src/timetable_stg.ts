@@ -1,14 +1,15 @@
-import { RateMyProfApi, ProfessorInfo } from './rate_my_prof_api';
+import { browser } from "webextension-polyfill-ts";
+import { ProfessorInfo } from "./rate_my_prof_api";
 
 class TimetableStg {
   constructor() {
-    let client = new RateMyProfApi();
-
     let observer = new MutationObserver(() => {
       this.getCourses().forEach(async el => {
         const name = this.getProfName(el);
         if (name !== '—') {
-          const profInfo = await client.getProfInfo(name);
+          const profInfo = await browser.runtime.sendMessage({
+            "getProfInfo": name
+          });
           if (profInfo != null) {
             el.appendChild(this.createHeaderField());
             el.appendChild(this.createInfoField(profInfo));

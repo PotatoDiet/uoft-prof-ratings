@@ -17,6 +17,10 @@
     }
   ],
 
+  "background": {
+    "scripts": ["build/background.js"]
+  },
+
   "permissions": [
     "https://www.ratemyprofessors.com/search.jsp?*",
     "https://www.ratemyprofessors.com/ShowRatings.jsp?*",
