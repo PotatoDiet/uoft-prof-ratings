@@ -1,7 +1,4 @@
-dist/*
-!dist/manifest.json
-build/
-node_modules/
-web-ext-artifacts/
-dist.pem
-dist.crx
+/dst/
+/build/
+/node_modules/
+/web-ext-artifacts/
