@@ -72,8 +72,8 @@ export class RateMyProfApi {
 
     const profInfo = {
       overallQuality: doc.querySelector("[class^=RatingValue__Numerator-]")?.innerHTML.trim(),
-      wouldTakeAgain: doc.querySelector("[class^=FeedbackItem__FeedbackNumber-]")?.innerHTML.trim(),
-      levelOfDifficulty: doc.querySelector("[class^=FeedbackItem__FeedbackNumber]")?.innerHTML.trim()
+      wouldTakeAgain: doc.querySelector("[class^=FeedbackItem__StyledFeedbackItem-]:nth-child(1) div")?.innerHTML.trim(),
+      levelOfDifficulty: doc.querySelector("[class^=FeedbackItem__StyledFeedbackItem-]:nth-child(2) div")?.innerHTML.trim()
     };
     if (!isProfessorInfo(profInfo)) {
       return null;
