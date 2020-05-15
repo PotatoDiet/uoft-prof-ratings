@@ -18,19 +18,19 @@ function isProfessorInfo(obj: any): obj is ProfessorInfo {
 }
 
 export class RateMyProfApi {
-  private readonly schoolId = '12184';
   private readonly baseUrl = 'https://www.ratemyprofessors.com/';
 
-  private async getProfId(name: string): Promise<string | null> {
+  private async getProfId(name: string, schoolId: string): Promise<string | null> {
     name = name.split(',')[0];
 
     let searchParams = new URLSearchParams();
     searchParams.set('queryoption', 'HEADER');
     searchParams.set('queryBy', 'teacherName');
     searchParams.set('schoolName', 'University+Of+Toronto');
-    searchParams.set('schoolId', this.schoolId);
+    searchParams.set('schoolId', schoolId);
     searchParams.set('query', name);
 
+    console.log(this.baseUrl + 'search.jsp?' + searchParams.toString());
     const response = await fetch(this.baseUrl + 'search.jsp?' + searchParams.toString());
 
     const parser = new DOMParser();
@@ -46,7 +46,7 @@ export class RateMyProfApi {
     return idUrl.searchParams.get('tid');
   }
 
-  public async getProfInfo(name: string): Promise<ProfessorInfo | null> {
+  public async getProfInfo(name: string, schoolId: string): Promise<ProfessorInfo | null> {
     try {
       const res = await browser.storage.local.get(name);
       const profInfo = res[name];
@@ -58,7 +58,7 @@ export class RateMyProfApi {
       return null;
     }
 
-    const profId = await this.getProfId(name);
+    const profId = await this.getProfId(name, schoolId);
     if (profId === null) {
       return null;
     }
@@ -79,7 +79,7 @@ export class RateMyProfApi {
       return null;
     }
 
-    browser.storage.local.set({[name]: JSON.stringify(profInfo)});
+    await browser.storage.local.set({[name]: JSON.stringify(profInfo)});
 
     return profInfo;
   }

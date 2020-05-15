@@ -8,7 +8,7 @@ class TimetableUtm {
         const name = this.getProfName(el);
         if (name !== '—' && name !== '') {
           const profInfo = await browser.runtime.sendMessage({
-            "getProfInfo": name
+            "getProfInfo": { name: name, schoolId: "12184" }
           });
           if (profInfo != null) {
             el.parentNode!.insertBefore(this.createInfoField(profInfo), el.nextSibling);

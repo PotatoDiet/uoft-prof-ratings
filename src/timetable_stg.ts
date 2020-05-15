@@ -8,7 +8,7 @@ class TimetableStg {
         const name = this.getProfName(el);
         if (name !== '—') {
           const profInfo = await browser.runtime.sendMessage({
-            "getProfInfo": name
+            "getProfInfo": { name: name, schoolId: "1484" }
           });
           if (profInfo != null) {
             el.appendChild(this.createHeaderField());
