@@ -1,4 +1,6 @@
 # UofT Prof Ratings
+![Mozilla Add-on](https://img.shields.io/amo/v/uoft-prof-ratings)
+
 Beware of terrible code ahead.
 
 # Screenshots
